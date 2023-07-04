@@ -10,7 +10,7 @@ import logging
 # transformers_logger.setLevel(logging.WARNING)
 
 # Load data
-train_df = pd.read_csv('train-dataset.csv',sep=",")
+train_df = pd.read_csv('test.csv',sep=",")
 # val_df = pd.read_csv('val-dataset.csv')
 
 train_df = train_df[['text', 'labels']]
@@ -26,8 +26,8 @@ train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
              "num_train_epochs": 4,
-             "train_batch_size": 16
-                           }
+             "train_batch_size": 8
+        }
 
 # Create a ClassificationModel
 model = ClassificationModel(
