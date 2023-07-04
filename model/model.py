@@ -10,7 +10,7 @@ import logging
 # transformers_logger.setLevel(logging.WARNING)
 
 # Load data
-train_df = pd.read_csv('test.csv',sep=",")
+train_df = pd.read_csv('train-dataset.csv',sep=",")
 # val_df = pd.read_csv('val-dataset.csv')
 
 train_df = train_df[['text', 'labels']]
