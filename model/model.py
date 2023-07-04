@@ -1,8 +1,7 @@
 from simpletransformers.classification import ClassificationModel, ClassificationArgs
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import numpy as np
-import logging
+import argparse
 
 
 # logging.basicConfig(level=logging.INFO)
@@ -11,6 +10,11 @@ import logging
 
 # Load data
 from print_stat import print_information
+parser = argparse.ArgumentParser(
+    description='''evaluates multiple models  ''')
+parser.add_argument('--model_name', required=False, help='model name', default="xlm-roberta-large")
+parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
+arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
 # val_df = pd.read_csv('val-dataset.csv')
@@ -37,9 +41,11 @@ train_args = {"reprocess_input_data": True,
              "n_fold":1
         }
 
+MODEL_NAME = arguments.model_name
+MODEL_TYPE = arguments.model_type
 # Create a ClassificationModel
 model = ClassificationModel(
-    "bert", "bert-base-cased",
+    MODEL_TYPE, MODEL_NAME,
     args=train_args,
 )
 
