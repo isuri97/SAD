@@ -15,12 +15,12 @@ from print_stat import print_information
 train_df = pd.read_csv('train-dataset.csv', sep=",")
 # val_df = pd.read_csv('val-dataset.csv')
 
-train_df = train_df[['id', 'text', 'label']]
+train_df = train_df[['id', 'text', 'labels']]
 # print(train_df)
 
 # Optional model configuration
 train_set, validation_set = train_test_split(train_df, test_size=0.2)
-new_df = validation_set[['id', 'label']].copy()
+new_df = validation_set[['id', 'labels']].copy()
 new_df.to_csv('test.tsv', index=False)
 
 print(validation_set)
@@ -50,10 +50,10 @@ model.train_model(train_set)
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-validation_set['label'] = predictions
+validation_set['prediction'] = predictions
 print(validation_set)
 
-new_df2 = validation_set[['id', 'label']].copy()
+new_df2 = validation_set[['id', 'prediction']].copy()
 new_df2.to_csv('valid.tsv', index=False)
 
 # Evaluate the model
