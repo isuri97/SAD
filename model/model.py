@@ -37,7 +37,7 @@ model = ClassificationModel(
 )
 
 # Train the model
-model.train_model(train_df)
+model.train_model(train_set)
 #
 # Evaluate the model
 result, model_outputs, wrong_predictions = model.eval_model(validation_set)
