@@ -9,7 +9,7 @@ import logging
 # transformers_logger = logging.getLogger("transformers")
 # transformers_logger.setLevel(logging.WARNING)
 
-#Load data
+# Load data
 train_df = pd.read_csv('train-dataset.csv')
 val_df = pd.read_csv('val-dataset.csv')
 
@@ -20,7 +20,6 @@ train_df = train_df[['text', 'label']]
 print(train_df)
 # val_df = val_df[['text', 'label']]
 
-
 # model_args = ClassificationArgs(num_train_epochs=1)
 
 # Optional model configuration
@@ -28,7 +27,7 @@ train_set, validation_set = train_test_split(train_df, test_size=0.2)
 
 
 # define hyperparameter
-train_args ={"reprocess_input_data": True,
+train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
              "num_train_epochs": 4}
