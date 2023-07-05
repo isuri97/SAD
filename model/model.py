@@ -34,7 +34,7 @@ test_sentences = val_df['text'].tolist()
 train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
-             "num_train_epochs": 3,
+             "num_train_epochs": 4,
              "train_batch_size": 8,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
