@@ -17,7 +17,7 @@ parser.add_argument('--model_type', required=False, help='model type', default="
 arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
-# val_df = pd.read_csv('val-dataset.csv')
+val_df = pd.read_csv('val-dataset.csv', sep=",")
 
 train_df = train_df[['id', 'text', 'labels']]
 # print(train_df)
@@ -28,7 +28,7 @@ new_df = validation_set[['id', 'labels']].copy()
 new_df.to_csv('test.tsv', index=False)
 
 print(validation_set)
-test_sentences = validation_set['text'].tolist()
+test_sentences = val_df['text'].tolist()
 
 # define hyperparameter
 train_args = {"reprocess_input_data": True,
@@ -60,7 +60,7 @@ validation_set['prediction'] = predictions
 print(validation_set)
 
 new_df2 = validation_set[['id', 'prediction']].copy()
-new_df2.to_csv('valid.tsv', index=False)
+new_df2.to_csv('valid2.tsv', index=False)
 
 # Evaluate the model
 result, model_outputs, wrong_predictions = model.eval_model(validation_set)
