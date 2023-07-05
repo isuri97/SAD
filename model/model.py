@@ -63,7 +63,7 @@ new_df2 = validation_set[['id', 'prediction']].copy()
 new_df2.to_csv('valid2.tsv', index=False)
 
 # Evaluate the model
-result, model_outputs, wrong_predictions = model.eval_model(validation_set)
+# result, model_outputs, wrong_predictions = model.eval_model(validation_set)
 
 
 
