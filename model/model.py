@@ -21,11 +21,13 @@ val_df = pd.read_csv('val-dataset.csv', sep=",")
 
 train_df = train_df[['id', 'text', 'labels']]
 # print(train_df)
+merged_df = train_df.merge(val_df, on='id', how='inner')
+new_df = merged_df[['id', 'labels']].copy()
+new_df.to_csv('test.tsv', index=False)
 
 # Optional model configuration
 train_set, validation_set = train_test_split(train_df, test_size=0.2)
-new_df = validation_set[['id', 'labels']].copy()
-new_df.to_csv('test.tsv', index=False)
+
 
 print(validation_set)
 test_sentences = val_df['text'].tolist()
