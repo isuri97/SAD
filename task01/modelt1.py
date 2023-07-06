@@ -18,7 +18,7 @@ arguments = parser.parse_args()
 train_df = pd.read_csv('training.tsv', sep="\t")
 val_df = pd.read_csv('validation.tsv', sep="\t")
 
-train_df = train_df[['tweet_id', 'text', 'label']]
+# train_df = train_df[['tweet_id', 'text', 'label']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
 # merged_df = train_df.merge(val_df, on='id', how='inner')
@@ -40,7 +40,7 @@ train_args = {"reprocess_input_data": True,
              "train_batch_size": 8,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
-             "n_fold":1
+             "n_fold":1,
         }
 
 MODEL_NAME = arguments.model_name
@@ -48,7 +48,7 @@ MODEL_TYPE = arguments.model_type
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
-    args=train_args,
+    args=train_args, use_cuda=False
 )
 
 # Train the model
