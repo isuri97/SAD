@@ -1,7 +1,7 @@
 from simpletransformers.classification import ClassificationModel, ClassificationArgs
 import pandas as pd
 import argparse
-
+import torch
 
 # logging.basicConfig(level=logging.INFO)
 # transformers_logger = logging.getLogger("transformers")
@@ -48,7 +48,7 @@ MODEL_TYPE = arguments.model_type
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
-    args=train_args, use_cuda=False
+    args=train_args, use_cuda=torch.cuda.is_available()
 )
 
 # Train the model
