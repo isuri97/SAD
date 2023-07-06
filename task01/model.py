@@ -15,7 +15,7 @@ parser.add_argument('--model_name', required=False, help='model name', default="
 parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
 arguments = parser.parse_args()
 
-train_df = pd.read_csv('test.tsv', sep="\t")
+train_df = pd.read_csv('training.tsv', sep="\t")
 val_df = pd.read_csv('validation.tsv', sep="\t")
 
 train_df = train_df[['tweet_id', 'text', 'label']]
