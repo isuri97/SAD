@@ -8,7 +8,7 @@ import torch
 # transformers_logger.setLevel(logging.WARNING)
 
 # Load data
-from task01.print_stat import print_information
+from print_stat import print_information
 
 parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
