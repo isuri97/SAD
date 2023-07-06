@@ -11,14 +11,14 @@ import torch
 
 parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
-parser.add_argument('--model_name', required=False, help='model name', default="xlm-roberta-large")
-parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
+parser.add_argument('--model_name', required=False, help='model name', default="bert-base-cased")
+parser.add_argument('--model_type', required=False, help='model type', default="bert")
 arguments = parser.parse_args()
 
 train_df = pd.read_csv('training.tsv', sep="\t")
 val_df = pd.read_csv('validation.tsv', sep="\t")
 
-# train_df = train_df[['tweet_id', 'text', 'label']]
+train_df = train_df[['tweet_id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
 # merged_df = train_df.merge(val_df, on='id', how='inner')
@@ -58,10 +58,10 @@ model.train_model(train_df)
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-val_df['label'] = predictions
+val_df['labels'] = predictions
 print(val_df)
 
-new_df2 = val_df[['id', 'label']].copy()
+new_df2 = val_df[['id', 'labels']].copy()
 new_df2.to_csv('valid2.tsv', sep='\t', index=False)
 
 # Evaluate the model
