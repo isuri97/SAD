@@ -24,7 +24,7 @@ dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "v
 dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep='\t')
 
 # dtruth = pd.read_csv('valid.tsv', sep=',')
-assert 'id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
+assert 'tweet_id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
 assert 'labels' in dtruth.columns, "I was expecting the column label to be in the tsv file"
 
 dtruth.set_index('id', inplace=True)
@@ -46,7 +46,7 @@ dpred = pd.read_csv('valid2.tsv', sep='\t')
 # assert 'id' in dpred.columns, "I was expecting the column id to be in the tsv file, it was not found."
 # assert 'label' in dpred.columns, "I was expecting the column label containing the predictions of the classifier to evaluate to be in the tsv file."
 
-dpred.set_index('id', inplace=True)
+dpred.set_index('tweet_id', inplace=True)
 dpred.rename(columns={"prediction": "pred"}, inplace=True)
 
 assert len(dtruth) == len(dpred), "The number of posts predicted " + str(len(dpred)) + " is not equal to the number of posts annotated in the test set " + str(len(dtruth))
