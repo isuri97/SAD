@@ -75,10 +75,12 @@ result, model_outputs, wrong_predictions = model.eval_model(val_df)
 dtruth = pd.read_csv('test.tsv', sep='\t')
 dtruth.set_index('tweet_id', inplace=True)
 
+
+dpred = pd.read_csv('valid2.tsv', sep='\t')
+
 dpred.set_index('tweet_id', inplace=True)
 dpred.rename(columns={"prediction": "pred"}, inplace=True)
 
-dpred = pd.read_csv('valid2.tsv', sep='\t')
 assert len(dtruth) == len(dpred)
 
 dEval = pd.concat([dtruth, dpred], axis=1, join='inner')
