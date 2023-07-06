@@ -20,7 +20,7 @@ print("Start scoring")
 # unzipped reference data is always in the 'ref' subdirectory
 # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
 
-dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "valid.tsv"]][0]
+dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "valid2.tsv"]][0]
 dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep='\t')
 
 # dtruth = pd.read_csv('valid.tsv', sep=',')
