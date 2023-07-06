@@ -16,8 +16,8 @@ parser.add_argument('--model_name', required=False, help='model name', default="
 parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
 arguments = parser.parse_args()
 
-train_df = pd.read_csv('test.csv', sep=",")
-val_df = pd.read_csv('valid.tsv', sep=",")
+train_df = pd.read_csv('train-dataset.csv', sep=",")
+val_df = pd.read_csv('val-dataset.csv', sep=",")
 
 train_df = train_df[['id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
