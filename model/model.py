@@ -22,7 +22,7 @@ val_df = pd.read_csv('val-dataset.csv', sep=",")
 train_df = train_df[['id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
-merged_df = train_df.merge(val_df, on='id', how='inner')
+merged_df = val_df.merge(train_df, on='id', how='inner')
 selected_labels = merged_df['labels']
 matched_df = merged_df['id']
 # matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
