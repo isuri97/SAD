@@ -22,11 +22,11 @@ val_df = pd.read_csv('val-dataset.csv', sep=",")
 train_df = train_df[['id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
-merged_df = val_df.merge(train_df, on='id', how='inner')
+merged_df = train_df.merge(val_df, on='id', how='inner')
 selected_labels = merged_df['labels']
-matched_df = merged_df['id']
-# matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
-new_df = pd.DataFrame({'id': matched_df, 'labels': selected_labels})
+# matched_df = merged_df['id']
+matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
+new_df = pd.DataFrame({'id': matched_ids, 'labels': selected_labels})
 print(new_df)
 
 new_df.to_csv('test.tsv', sep='\t', index=False)
@@ -64,10 +64,10 @@ model.train_model(train_set)
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-val_df['prediction'] = predictions
+val_df['label'] = predictions
 print(val_df)
 
-new_df2 = val_df[['id', 'prediction']].copy()
+new_df2 = val_df[['id', 'label']].copy()
 new_df2.to_csv('valid2.tsv', sep='\t', index=False)
 
 # Evaluate the model
