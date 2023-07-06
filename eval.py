@@ -27,7 +27,7 @@ dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep='\t')
 assert 'tweet_id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
 assert 'labels' in dtruth.columns, "I was expecting the column label to be in the tsv file"
 
-dtruth.set_index('id', inplace=True)
+dtruth.set_index('tweet_id', inplace=True)
 
 # unzipped submission data is always in the 'res' subdirectory
 # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
