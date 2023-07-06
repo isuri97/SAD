@@ -62,7 +62,7 @@ model.train_model(train_df)
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-val_df['pred'] = predictions
+val_df['prediction'] = predictions
 print(val_df)
 
 # print_information(val_df, "pred", "labels")
