@@ -57,9 +57,9 @@ dEval.to_csv('/tmp/out.tsv', sep='\t')
 
 #cf = confusion_matrix(list(dEval['label']), list(dEval['Class']))
 #cr = classification_report(list(dEval['label']), list(dEval['Class']),digits=4)
-prec = precision_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
-rec = recall_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
-f1 = f1_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
+prec = precision_score(list(dEval['label']), list(dEval['pred']), pos_label=1, average='binary')
+rec = recall_score(list(dEval['label']), list(dEval['pred']), pos_label=1, average='binary')
+f1 = f1_score(list(dEval['label']), list(dEval['pred']), pos_label=1, average='binary')
 
 #print(f"cf matrix: {cf}\ncr :{cr}\nPrec:{prec}, Rec:{rec}, F1:{f1}")
 
