@@ -16,14 +16,20 @@ parser.add_argument('--model_name', required=False, help='model name', default="
 parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
 arguments = parser.parse_args()
 
-train_df = pd.read_csv('train-dataset.csv', sep=",")
-val_df = pd.read_csv('val-dataset.csv', sep=",")
+train_df = pd.read_csv('test.csv', sep=",")
+val_df = pd.read_csv('valid.tsv', sep=",")
 
 train_df = train_df[['id', 'text', 'labels']]
-# print(train_df)
+# ids_to_select = val_df['id'].astype(int)
+# selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
 merged_df = train_df.merge(val_df, on='id', how='inner')
-new_df = merged_df[['id', 'labels']].copy()
-new_df.to_csv('test.tsv', index=False)
+selected_labels = merged_df['labels']
+matched_df = merged_df['id']
+# matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
+new_df = pd.DataFrame({'id': matched_df, 'labels': selected_labels})
+print(new_df)
+
+new_df.to_csv('test.tsv', sep='\t', index=False)
 
 # Optional model configuration
 train_set, validation_set = train_test_split(train_df, test_size=0.2)
