@@ -47,7 +47,7 @@ dpred = pd.read_csv('valid2.tsv', sep='\t')
 # assert 'label' in dpred.columns, "I was expecting the column label containing the predictions of the classifier to evaluate to be in the tsv file."
 
 dpred.set_index('tweet_id', inplace=True)
-dpred.rename(columns={"prediction": "pred"}, inplace=True)
+dpred.rename(columns={"label": "pred"}, inplace=True)
 
 assert len(dtruth) == len(dpred), "The number of posts predicted " + str(len(dpred)) + " is not equal to the number of posts annotated in the test set " + str(len(dtruth))
 assert dtruth.sort_index().index.equals(dpred.sort_index().index), "The post IDs in the test set do not correspond to the post IDs in the set of posts predicted"
