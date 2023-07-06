@@ -20,14 +20,14 @@ print("Start scoring")
 # unzipped reference data is always in the 'ref' subdirectory
 # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
 
-dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "valid2.tsv"]][0]
+dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "valid.tsv"]][0]
 dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep='\t')
 
 # dtruth = pd.read_csv('valid.tsv', sep=',')
-assert 'tweet_id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
+assert 'id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
 assert 'labels' in dtruth.columns, "I was expecting the column label to be in the tsv file"
 
-dtruth.set_index('tweet_id', inplace=True)
+dtruth.set_index('id', inplace=True)
 
 # unzipped submission data is always in the 'res' subdirectory
 # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
@@ -46,8 +46,8 @@ dpred = pd.read_csv('valid2.tsv', sep='\t')
 # assert 'id' in dpred.columns, "I was expecting the column id to be in the tsv file, it was not found."
 # assert 'label' in dpred.columns, "I was expecting the column label containing the predictions of the classifier to evaluate to be in the tsv file."
 
-dpred.set_index('tweet_id', inplace=True)
-dpred.rename(columns={"labels": "pred"}, inplace=True)
+dpred.set_index('id', inplace=True)
+dpred.rename(columns={"prediction": "pred"}, inplace=True)
 
 assert len(dtruth) == len(dpred), "The number of posts predicted " + str(len(dpred)) + " is not equal to the number of posts annotated in the test set " + str(len(dtruth))
 assert dtruth.sort_index().index.equals(dpred.sort_index().index), "The post IDs in the test set do not correspond to the post IDs in the set of posts predicted"

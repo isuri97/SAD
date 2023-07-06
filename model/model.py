@@ -1,4 +1,4 @@
-from simpletransformers.classification import ClassificationModel, ClassificationArgs
+from simpletransformers.classification import ClassificationModel
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import argparse
@@ -9,7 +9,6 @@ import argparse
 # transformers_logger.setLevel(logging.WARNING)
 
 # Load data
-from print_stat import print_information
 parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
 parser.add_argument('--model_name', required=False, help='model name', default="xlm-roberta-large")
