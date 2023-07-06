@@ -61,7 +61,7 @@ print(predictions)
 val_df['labels'] = predictions
 print(val_df)
 
-new_df2 = val_df[['id', 'labels']].copy()
+new_df2 = val_df[['tweet_id', 'labels']].copy()
 new_df2.to_csv('valid2.tsv', sep='\t', index=False)
 
 # Evaluate the model
