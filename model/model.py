@@ -68,7 +68,7 @@ val_df['prediction'] = predictions
 print(val_df)
 
 new_df2 = val_df[['id', 'prediction']].copy()
-new_df2.to_csv('valid2.tsv', index=False)
+new_df2.to_csv('valid2.tsv', sep='\t', index=False)
 
 # Evaluate the model
 result, model_outputs, wrong_predictions = model.eval_model(validation_set)

@@ -21,7 +21,7 @@ print("Start scoring")
 # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
 
 dtruth = [x for x in os.listdir(os.path.join(input_dir)) if x in ["test.tsv", "valid.tsv"]][0]
-dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep=',')
+dtruth = pd.read_csv(os.path.join(input_dir, dtruth), sep='\t')
 
 # dtruth = pd.read_csv('valid.tsv', sep=',')
 assert 'id' in dtruth.columns, "I was expecting the column id to be in the tsv file"
@@ -42,7 +42,7 @@ output_dir = '../output/'
 #     log.fatal('Expected submission named predictions.tsv, found files: ' + submission_path)
 #     raise Exception('Expected submission named predictions.tsv, found files: ' + submission_path)
 
-dpred = pd.read_csv('valid.tsv', sep=',')
+dpred = pd.read_csv('valid2.tsv', sep='\t')
 # assert 'id' in dpred.columns, "I was expecting the column id to be in the tsv file, it was not found."
 # assert 'label' in dpred.columns, "I was expecting the column label containing the predictions of the classifier to evaluate to be in the tsv file."
 
