@@ -49,8 +49,8 @@ EPOCHS = int(arguments.epochs)
 train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
-             "num_train_epochs": EPOCHS,
-             "train_batch_size": 8,
+             "num_train_epochs": 1,
+             "train_batch_size": 16,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
@@ -70,7 +70,7 @@ model = ClassificationModel(
 model.train_model(combined_train, eval_df=combined_val)
 
 
-
+train_args['num_train_epochs']=EPOCHS
 
 
 #further finetune on task dataset
