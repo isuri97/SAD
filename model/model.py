@@ -31,7 +31,7 @@ print(new_df)
 new_df.to_csv('test.tsv', sep='\t', index=False)
 
 # Optional model configuration
-train_set, validation_set = train_test_split(train_df, test_size=0.2)
+train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 
 print(validation_set)
@@ -46,7 +46,8 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
-             "wandb_project":"SAD"
+             "wandb_project":"SAD",
+             "use_early_stopping ":True
         }
 
 # model_args.wandb_project="holo-ner"
@@ -55,7 +56,7 @@ MODEL_TYPE = arguments.model_type
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
-    args=train_args,
+    args=train_args,eval_df=validation_set
 )
 
 # Train the model
