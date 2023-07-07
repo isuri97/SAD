@@ -46,8 +46,10 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
+              "wandb_project":"SAD"
         }
 
+# model_args.wandb_project="holo-ner"
 MODEL_NAME = arguments.model_name
 MODEL_TYPE = arguments.model_type
 # Create a ClassificationModel
