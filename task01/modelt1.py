@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
 parser.add_argument('--model_name', required=False, help='model name', default="bert-base-cased")
 parser.add_argument('--model_type', required=False, help='model type', default="bert")
+parser.add_argument('--epochs', required=False, default= 4)
 arguments = parser.parse_args()
 
 train_df = pd.read_csv('training.tsv', sep="\t")
@@ -36,19 +37,22 @@ train_df = train_df[['tweet_id', 'text', 'labels']]
 
 test_sentences = val_df['text'].tolist()
 
+MODEL_NAME = arguments.model_name
+MODEL_TYPE = arguments.model_type
+EPOCHS = int(arguments.epochs)
+
 # define hyperparameter
 train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
-             "num_train_epochs": 4,
+             "num_train_epochs": EPOCHS,
              "train_batch_size": 8,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
         }
 
-MODEL_NAME = arguments.model_name
-MODEL_TYPE = arguments.model_type
+
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
