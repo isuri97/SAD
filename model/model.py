@@ -18,6 +18,7 @@ arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
 val_df = pd.read_csv('val-dataset.csv', sep=",")
+combined_df = pd.read_csv('combined.csv', sep=",")
 
 train_df = train_df[['id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
@@ -33,6 +34,7 @@ new_df.to_csv('test.tsv', sep='\t', index=False)
 
 # Optional model configuration
 train_set, validation_set = train_test_split(train_df, test_size=0.1)
+combined_train, combined_val = train_test_split(combined_df, test_size=0.1)
 
 
 print(validation_set)
@@ -53,13 +55,29 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
              "wandb_project":"SAD",
-             "use_early_stopping ":True
+             "use_early_stopping ":True,
+              "evaluate_during_training":True,
+              "save_best_model":True
         }
-
 
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
+    args=train_args
+)
+
+# Train the model
+model.train_model(combined_train, eval_df=combined_val)
+
+
+
+
+
+#further finetune on task dataset
+
+# Create a ClassificationModel
+model = ClassificationModel(
+    MODEL_TYPE, "outputs/best_model/",
     args=train_args
 )
 
