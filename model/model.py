@@ -46,7 +46,7 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
-              "wandb_project":"SAD"
+             "wandb_project":"SAD"
         }
 
 # model_args.wandb_project="holo-ner"
