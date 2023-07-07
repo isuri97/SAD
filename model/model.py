@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(
     description='''evaluates multiple models  ''')
 parser.add_argument('--model_name', required=False, help='model name', default="xlm-roberta-large")
 parser.add_argument('--model_type', required=False, help='model type', default="xlmroberta")
+parser.add_argument('--epochs', required=False, default= 4)
 arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
@@ -37,11 +38,16 @@ train_set, validation_set = train_test_split(train_df, test_size=0.1)
 print(validation_set)
 test_sentences = val_df['text'].tolist()
 
+# model_args.wandb_project="holo-ner"
+MODEL_NAME = arguments.model_name
+MODEL_TYPE = arguments.model_type
+EPOCHS = int(arguments.epochs)
+
 # define hyperparameter
 train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
-             "num_train_epochs": 4,
+             "num_train_epochs": EPOCHS,
              "train_batch_size": 8,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
@@ -50,9 +56,7 @@ train_args = {"reprocess_input_data": True,
              "use_early_stopping ":True
         }
 
-# model_args.wandb_project="holo-ner"
-MODEL_NAME = arguments.model_name
-MODEL_TYPE = arguments.model_type
+
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
