@@ -46,7 +46,6 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
-             "learning_rate": 4e-5
         }
 
 MODEL_NAME = arguments.model_name
