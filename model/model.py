@@ -60,11 +60,11 @@ train_args = {"reprocess_input_data": True,
 # Create a ClassificationModel
 model = ClassificationModel(
     MODEL_TYPE, MODEL_NAME,
-    args=train_args,eval_df=validation_set
+    args=train_args
 )
 
 # Train the model
-model.train_model(train_set)
+model.train_model(train_set, eval_df=validation_set)
 
 # Make predictions with the model
 predictions, raw_outputs = model.predict(test_sentences)
