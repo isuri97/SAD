@@ -16,7 +16,8 @@ train_set, validation_set = train_test_split(train_df, test_size=0.1)
 # eval_df = pd.DataFrame(eval_data)
 # eval_df.columns = ["prefix", "input_text", "target_text"]
 # eval_df['target_text'] = eval_df['target_text'].astype(str)
-
+# text_add = 'binary classification:'
+val_df['text'] = 'binary classification:' + val_df['text'].astype(str)
 test_sentences = val_df['text'].tolist()
 
 validation_set
