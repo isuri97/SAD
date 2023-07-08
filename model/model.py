@@ -20,23 +20,34 @@ train_df = pd.read_csv('train-dataset.csv', sep=",")
 val_df = pd.read_csv('val-dataset.csv', sep=",")
 combined_df = pd.read_csv('reduced-combined.csv', sep=",")
 
-# train_df = train_df[['id', 'text', 'labels']]
 train_df = train_df[['text', 'labels']]
-combined_df = combined_df [['text','labels']]
+combined_df = combined_df[['text','labels']]
+
+train_df = pd.concat([train_df, combined_df], ignore_index=True)
+
+# train_df = train_df[['id', 'text', 'labels']]
+# # train_df = train_df[['text', 'labels']]
+# combined_df = combined_df [['text','labels']]
+
+
+
+
+
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
-merged_df = train_df.merge(val_df, on='id', how='inner')
-selected_labels = merged_df['labels']
-# matched_df = merged_df['id']
-matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
-new_df = pd.DataFrame({'id': matched_ids, 'labels': selected_labels})
-print(new_df)
+# merged_df = train_df.merge(val_df, on='id', how='inner')
+# selected_labels = merged_df['labels']
+# # matched_df = merged_df['id']
+# matched_ids = val_df[val_df['id'].isin(train_df['id'])]['id'].tolist()
+# new_df = pd.DataFrame({'id': matched_ids, 'labels': selected_labels})
+# print(new_df)
 
-new_df.to_csv('test.tsv', sep='\t', index=False)
+# new_df.to_csv('test.tsv', sep='\t', index=False)
 
 # Optional model configuration
-train_set, validation_set = train_test_split(train_df, test_size=0.1)
-train_set = train_set + combined_df
+# train_df = train_df + combined_df
+train_set, validation_set = train_test_split(combined_df, test_size=0.1)
+
 
 
 print(validation_set)
