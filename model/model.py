@@ -72,7 +72,7 @@ train_args = {"reprocess_input_data": True,
              "use_early_stopping ":True,
               "evaluate_during_training":True,
               "save_best_model":True,
-              "learning_rate": 4e-3
+              "learning_rate": 4e-4
         }
 
 # # Create a ClassificationModel
