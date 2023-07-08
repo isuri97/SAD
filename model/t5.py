@@ -19,6 +19,10 @@ train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 test_sentences = val_df['text'].tolist()
 
+validation_set
+validation_set.columns = ["prefix", "input_text", "target_text"]
+validation_set['target_text'] = validation_set['target_text'].astype(str)
+
 
 # Configure the model
 model_args = T5Args()
