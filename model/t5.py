@@ -8,7 +8,8 @@ val_df = pd.read_csv('val-dataset.csv', sep=",")
 # train_df= train_df.columns = ["text", "labels"]
 # train_df['text'] = train_df['text'].astype(str)
 
-train_df = train_df[['prefix','text','labels']]
+train_df = train_df[['prefix','input_text','target_text']]
+train_df['target_text'] = train_df['target_text'].astype(str)
 
 train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
