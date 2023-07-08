@@ -5,8 +5,10 @@ from sklearn.model_selection import train_test_split
 train_df = pd.read_csv('train-dataset.csv', sep=",")
 val_df = pd.read_csv('val-dataset.csv', sep=",")
 
-train_df.columns = ["text", "labels"]
+# train_df= train_df.columns = ["text", "labels"]
 # train_df['text'] = train_df['text'].astype(str)
+
+train_df = train_df[['text','labels']]
 
 train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
