@@ -71,7 +71,8 @@ train_args = {"reprocess_input_data": True,
              "wandb_project":"SAD",
              "use_early_stopping ":True,
               "evaluate_during_training":True,
-              "save_best_model":True
+              "save_best_model":True,
+              "learning_rate": 4e-3
         }
 
 # # Create a ClassificationModel
