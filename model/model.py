@@ -21,10 +21,10 @@ val_df = pd.read_csv('val-dataset.csv', sep=",")
 combined_df = pd.read_csv('reduced-combined.csv', sep=",")
 
 train_df = train_df[['text', 'labels']]
-# combined_df = combined_df[['text','labels']]
+combined_df = combined_df[['text','labels']]
 #
-# train_df = pd.concat([train_df, combined_df], ignore_index=True)
-# train_df = train_df.sample(frac=1).reset_index(drop=True)
+train_df = pd.concat([train_df, combined_df], ignore_index=True)
+train_df = train_df.sample(frac=1).reset_index(drop=True)
 
 # train_df = train_df[['id', 'text', 'labels']]
 # # train_df = train_df[['text', 'labels']]
@@ -47,8 +47,8 @@ train_df = train_df[['text', 'labels']]
 
 # Optional model configuration
 # train_df = train_df + combined_df
-train_set =train_df
-# train_set, validation_set = train_test_split(train_df, test_size=0.1)
+# train_set =train_df
+train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 
 
