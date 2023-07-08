@@ -47,11 +47,12 @@ train_df = train_df[['text', 'labels']]
 
 # Optional model configuration
 # train_df = train_df + combined_df
-train_set, validation_set = train_test_split(train_df, test_size=0.1)
+train_set =train_df
+# train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 
 
-print(validation_set)
+# print(validation_set)
 test_sentences = val_df['text'].tolist()
 
 # model_args.wandb_project="holo-ner"
@@ -69,9 +70,9 @@ train_args = {"reprocess_input_data": True,
              "use_multiprocessing_for_evaluation":False,
              "n_fold":1,
              "wandb_project":"SAD",
-             "use_early_stopping ":True,
-              "evaluate_during_training":True,
-              "save_best_model":True,
+             # "use_early_stopping ":True,
+              # "evaluate_during_training":True,
+              # "save_best_model":True,
               "learning_rate": 4e-5
         }
 
@@ -97,7 +98,8 @@ model = ClassificationModel(
 )
 
 # Train the model
-model.train_model(train_set, eval_df=validation_set)
+# model.train_model(train_set, eval_df=validation_set)
+model.train_model(train_set)
 
 # Make predictions with the model
 predictions, raw_outputs = model.predict(test_sentences)
@@ -110,7 +112,7 @@ new_df2 = val_df[['id', 'label']].copy()
 new_df2.to_csv('valid2.tsv', sep='\t', index=False)
 
 # Evaluate the model
-result, model_outputs, wrong_predictions = model.eval_model(validation_set)
+# result, model_outputs, wrong_predictions = model.eval_model(validation_set)
 
 
 
