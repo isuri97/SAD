@@ -34,11 +34,12 @@ model_args.evaluate_during_training_verbose = True
 model_args.max_length = 512
 model_args.use_multiprocessing= False
 model_args.use_multiprocessing_for_evaluation=False
+model_args.evaluate_each_epoch = False
 
 model = T5Model("t5", "t5-base", args=model_args)
 
 # Train the model
-model.train_model(train_df, eval_data=validation_set)
+model.train_model(train_set, eval_data=validation_set)
 
 # Evaluate the model
 result = model.eval_model(validation_set)
