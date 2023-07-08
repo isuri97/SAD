@@ -26,6 +26,7 @@ model_args.no_save = True
 model_args.evaluate_generated_text = True
 model_args.evaluate_during_training = True
 model_args.evaluate_during_training_verbose = True
+model_args.max_length = 512
 
 model = T5Model("t5", "t5-base", args=model_args)
 
