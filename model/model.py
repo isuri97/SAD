@@ -18,9 +18,11 @@ arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
 val_df = pd.read_csv('val-dataset.csv', sep=",")
-combined_df = pd.read_csv('combined.csv', sep=",")
+combined_df = pd.read_csv('reduced-combined.csv', sep=",")
 
-train_df = train_df[['id', 'text', 'labels']]
+# train_df = train_df[['id', 'text', 'labels']]
+train_df = train_df[['text', 'labels']]
+combined_df = combined_df [['text','labels']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
 merged_df = train_df.merge(val_df, on='id', how='inner')
@@ -34,7 +36,7 @@ new_df.to_csv('test.tsv', sep='\t', index=False)
 
 # Optional model configuration
 train_set, validation_set = train_test_split(train_df, test_size=0.1)
-combined_train, combined_val = train_test_split(combined_df, test_size=0.1)
+train_set = train_set + combined_df
 
 
 print(validation_set)
@@ -49,7 +51,7 @@ EPOCHS = int(arguments.epochs)
 train_args = {"reprocess_input_data": True,
              "overwrite_output_dir": True,
              "fp16":False,
-             "num_train_epochs": 1,
+             "num_train_epochs": EPOCHS,
              "train_batch_size": 16,
              "use_multiprocessing": False,
              "use_multiprocessing_for_evaluation":False,
@@ -60,24 +62,24 @@ train_args = {"reprocess_input_data": True,
               "save_best_model":True
         }
 
-# Create a ClassificationModel
-model = ClassificationModel(
-    MODEL_TYPE, MODEL_NAME,
-    args=train_args
-)
-
-# Train the model
-model.train_model(combined_train, eval_df=combined_val)
-
-
-train_args['num_train_epochs']=EPOCHS
+# # Create a ClassificationModel
+# model = ClassificationModel(
+#     MODEL_TYPE, MODEL_NAME,
+#     args=train_args
+# )
+#
+# # Train the model
+# model.train_model(combined_train, eval_df=combined_val)
+#
+#
+# train_args['num_train_epochs']=EPOCHS
 
 
 #further finetune on task dataset
 
 # Create a ClassificationModel
 model = ClassificationModel(
-    MODEL_TYPE, "outputs/best_model/",
+    MODEL_TYPE, MODEL_NAME,
     args=train_args
 )
 
