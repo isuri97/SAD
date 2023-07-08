@@ -11,7 +11,7 @@ val_df = pd.read_csv('val-dataset-copy.csv', sep=",")
 train_df = train_df[['prefix','input_text','target_text']]
 train_df['target_text'] = train_df['target_text'].astype(str)
 
-train_set, validation_set = train_test_split(train_df, test_size=0.1)
+# train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 # eval_df = pd.DataFrame(eval_data)
 # eval_df.columns = ["prefix", "input_text", "target_text"]
@@ -20,17 +20,17 @@ train_set, validation_set = train_test_split(train_df, test_size=0.1)
 val_df['text'] = 'binary classification:' + val_df['text'].astype(str)
 test_sentences = val_df['text'].tolist()
 
-validation_set
-validation_set.columns = ["prefix", "input_text", "target_text"]
-validation_set['target_text'] = validation_set['target_text'].astype(str)
+# validation_set
+# validation_set.columns = ["prefix", "input_text", "target_text"]
+# validation_set['target_text'] = validation_set['target_text'].astype(str)
 
 
 # Configure the model
 model_args = T5Args()
 model_args.num_train_epochs = 100
 model_args.no_save = True
-model_args.evaluate_generated_text = True
-model_args.evaluate_during_training = True
+model_args.evaluate_generated_text = False
+model_args.evaluate_during_training = False
 model_args.evaluate_during_training_verbose = True
 model_args.max_length = 512
 model_args.use_multiprocessing= False
@@ -40,10 +40,10 @@ model_args.evaluate_each_epoch = False
 model = T5Model("t5", "t5-base", args=model_args)
 
 # Train the model
-model.train_model(train_set, eval_data=validation_set)
+model.train_model(train_df)
 
 # Evaluate the model
-result = model.eval_model(validation_set)
+# result = model.eval_model(validation_set)
 
 predictions = model.predict(test_sentences)
 
