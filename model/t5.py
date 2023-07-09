@@ -27,7 +27,7 @@ test_sentences = val_df['text'].tolist()
 
 # Configure the model
 model_args = T5Args()
-model_args.num_train_epochs = 10
+model_args.num_train_epochs = 100
 model_args.no_save = True
 model_args.evaluate_generated_text = False
 model_args.evaluate_during_training = False
@@ -36,6 +36,7 @@ model_args.max_length = 512
 model_args.use_multiprocessing= False
 model_args.use_multiprocessing_for_evaluation=False
 model_args.evaluate_each_epoch = False
+model_args.save_best_model = True
 
 model = T5Model("t5", "t5-base", args=model_args)
 
