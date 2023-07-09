@@ -34,7 +34,7 @@ prompt = PromptTemplate(template=template, input_variables=["question"])
 
 llm_chain = LLMChain(prompt=prompt, llm=llm)
 
-test = pd.read_csv('data/DAVIDSON/davidson_test.csv', sep="\t")
+test = pd.read_csv('data-train-llm.csv', sep=",")
 final_predictions = []
 
 for index, row in test.iterrows():
