@@ -40,13 +40,13 @@ model_args.evaluate_each_epoch = False
 model = T5Model("t5", "t5-base", args=model_args)
 
 # Train the model
-model.train_model(train_df)
+# model.train_model(train_df)
 
 # Evaluate the model
 # result = model.eval_model(validation_set)
 
 predictions = model.predict(test_sentences)
-
+print(predictions)
 
 val_df['label'] = predictions
 print(val_df)
