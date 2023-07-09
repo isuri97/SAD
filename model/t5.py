@@ -27,7 +27,7 @@ test_sentences = val_df['text'].tolist()
 
 # Configure the model
 model_args = T5Args()
-model_args.num_train_epochs = 100
+model_args.num_train_epochs = 50
 model_args.no_save = True
 model_args.evaluate_generated_text = False
 model_args.evaluate_during_training = False
