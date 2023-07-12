@@ -40,7 +40,8 @@ prompt = PromptTemplate(template=template, input_variables=["question"])
 
 llm_chain = LLMChain(prompt=prompt, llm=llm)
 
-test = pd.read_csv('data-train-llm.csv', sep=",")
+test = pd.read_csv('test_set.csv', sep=",")
+test = test[['id', 'text']]
 final_predictions = []
 
 for index, row in test.iterrows():
