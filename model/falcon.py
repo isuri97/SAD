@@ -9,7 +9,7 @@ import torch
 # from util.print_stat import print_information
 
 # set env
-os.environ('')
+# os.environ('')
 
 
 model = "tiiuae/falcon-7b-instruct" #tiiuae/falcon-40b-instruct
