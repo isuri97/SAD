@@ -23,7 +23,7 @@ pipeline = pipeline(
     torch_dtype=torch.bfloat16,
     trust_remote_code=True,
     device_map="auto",
-    max_length=1000,
+    max_length=300,
     do_sample=True,
     top_k=1,
     num_return_sequences=1,
@@ -33,8 +33,7 @@ pipeline = pipeline(
 # llm = AutoModelForCausalLM.from_pretrained(pipeline=pipeline, model_kwargs={'temperature':0})
 llm = HuggingFacePipeline(pipeline=pipeline, model_kwargs={'temperature':0})
 template = """Posts containing any form of conveys self reporting of social anxiety or diagnosed with social anxiety disorder, which can be veiled or direct are social anxiety posts. 
-This includes posts of self reported the social anxiety (SA), by describing symptoms of social anxiety. Posts that do not contain any information related to social Anxiety
-are not diagnosed as social anxiety.
+This includes posts of self reported the social anxiety (SA). Posts that do not contain any information related to social Anxiety are not diagnosed as social anxiety.
 Question: {question}
 Answer:"""
 prompt = PromptTemplate(template=template, input_variables=["question"])
