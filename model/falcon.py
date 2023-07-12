@@ -8,6 +8,10 @@ import torch
 
 # from util.print_stat import print_information
 
+# set env
+os.environ('')
+
+
 model = "tiiuae/falcon-7b-instruct" #tiiuae/falcon-40b-instruct
 
 tokenizer = AutoTokenizer.from_pretrained(model)
@@ -41,7 +45,7 @@ test = pd.read_csv('data-train-llm.csv', sep=",")
 final_predictions = []
 
 for index, row in test.iterrows():
-    question = "Can this post accurately as self reporting  social anxiety disorder? Comment: " + row['Text']
+    question = "Can this post accurately as self reporting  social anxiety disorder? Comment: " + row['text']
     response = llm_chain.run(question)
     if response.split(',')[0].strip() == "Yes":
         final_predictions.append(int(1))
