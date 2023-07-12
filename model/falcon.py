@@ -2,6 +2,7 @@ from langchain import HuggingFacePipeline
 from langchain import PromptTemplate,  LLMChain
 from transformers import AutoTokenizer, pipeline
 import pandas as pd
+from transformers import AutoModelForCausalLM
 import torch
 
 # from util.print_stat import print_information
@@ -24,7 +25,8 @@ pipeline = pipeline(
     eos_token_id=tokenizer.eos_token_id
 )
 
-llm = HuggingFacePipeline(pipeline=pipeline, model_kwargs={'temperature':0})
+llm = AutoModelForCausalLM.from_pretrained(pipeline=pipeline, model_kwargs={'temperature':0})
+# llm = HuggingFacePipeline(pipeline=pipeline, model_kwargs={'temperature':0})
 template = """Posts containing any form of conveys self reporting of social anxiety or diagnosed with social anxiety disorder, which can be veiled or direct are social anxiety posts. 
 This includes posts of self reported the social anxiety (SA), by describing symptoms of social anxiety. Posts that do not contain any information related to social Anxiety
 are not diagnosed as social anxiety.
