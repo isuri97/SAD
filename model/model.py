@@ -17,10 +17,12 @@ parser.add_argument('--epochs', required=False, default= 4)
 arguments = parser.parse_args()
 
 train_df = pd.read_csv('train-dataset.csv', sep=",")
-val_df = pd.read_csv('val-dataset.csv', sep=",")
+# val_df = pd.read_csv('val-dataset.csv', sep=",")
+test_df = pd.read_csv('test_set.csv', sep=",")
 # combined_df = pd.read_csv('reduced-combined.csv', sep=",")
 
 train_df = train_df[['text', 'labels']]
+# val_df = train_df[['text', 'labels']]
 # combined_df = combined_df[['text','labels']]
 #
 # train_df = pd.concat([train_df, combined_df], ignore_index=True)
@@ -48,12 +50,12 @@ train_df = train_df[['text', 'labels']]
 # Optional model configuration
 # train_df = train_df + combined_df
 # train_set =train_df
-train_set, validation_set = train_test_split(train_df, test_size=0.1)
+# train_set, validation_set = train_test_split(train_df, test_size=0.1)
 
 
 
 # print(validation_set)
-test_sentences = val_df['text'].tolist()
+test_sentences = test_df['text'].tolist()
 
 # model_args.wandb_project="holo-ner"
 MODEL_NAME = arguments.model_name
@@ -88,7 +90,6 @@ train_args = {"reprocess_input_data": True,
 #
 # train_args['num_train_epochs']=EPOCHS
 
-
 #further finetune on task dataset
 
 # Create a ClassificationModel
@@ -98,18 +99,18 @@ model = ClassificationModel(
 )
 
 # Train the model
-# model.train_model(train_set, eval_df=validation_set)
-model.train_model(train_set)
+# model.train_model(train_df, eval_df=val_df)
+model.train_model(train_df)
 
 # Make predictions with the model
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-val_df['label'] = predictions
-print(val_df)
+test_df['label'] = predictions
+print(test_df)
 
-new_df2 = val_df[['id', 'label']].copy()
-new_df2.to_csv('valid2.tsv', sep='\t', index=False)
+new_df2 = test_df[['id', 'label']].copy()
+new_df2.to_csv('test-transformer.tsv', sep='\t', index=False)
 
 # Evaluate the model
 # result, model_outputs, wrong_predictions = model.eval_model(validation_set)
