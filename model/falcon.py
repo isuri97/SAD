@@ -1,8 +1,9 @@
 from langchain import HuggingFacePipeline
 from langchain import PromptTemplate,  LLMChain
-from transformers import AutoTokenizer, pipeline
+from transformers import AutoTokenizer, pipeline,AutoModelForCausalLM
 import pandas as pd
-# from transformers import AutoModelForCausalLM
+import transformers
+
 import torch
 
 # from util.print_stat import print_information
