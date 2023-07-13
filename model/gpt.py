@@ -9,7 +9,7 @@ from openai import InvalidRequestError
 nltk.download('punkt')
 
 
-openai.api_key = "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"
+openai.api_key = "sk-WGxUGwhpUsMRNvTYsaosT3BlbkFJAc9HCMQTzqzPBWDWOH0vK"
 
 # load dataset
 test_data = pd.read_csv('test_set.csv', sep=',')
