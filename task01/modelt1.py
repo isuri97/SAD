@@ -72,40 +72,40 @@ test_df['prediction'] = predictions
 print(test_df)
 
 # print_information(val_df, "pred", "labels")
-dpred = val_df[['tweet_id', 'prediction']].copy()
-dpred.to_csv('valid2.tsv', sep='\t', index=False)
+dpred = test_df[['tweet_id', 'prediction']].copy()
+dpred.to_csv('testmodel1.tsv', sep='\t', index=False)
 
 # Evaluate the model
-result, model_outputs, wrong_predictions = model.eval_model(val_df)
-
-dtruth = pd.read_csv('test.tsv', sep='\t')
-dtruth.set_index('tweet_id', inplace=True)
-
-
-dpred = pd.read_csv('valid2.tsv', sep='\t')
-
-dpred.set_index('tweet_id', inplace=True)
-dpred.rename(columns={"prediction": "pred"}, inplace=True)
-
-assert len(dtruth) == len(dpred)
-
-dEval = pd.concat([dtruth, dpred], axis=1, join='inner')
-prec = precision_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
-rec = recall_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
-f1 = f1_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
-
-#print(f"cf matrix: {cf}\ncr :{cr}\nPrec:{prec}, Rec:{rec}, F1:{f1}")
-
-log.warning("scores computed")
-print("scores computed")
-
-# the scores for the leaderboard must be in a file named "scores.txt"
-# https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
-with open(os.path.join('scores.txt'), 'w') as output_file:
-    output_file.write("Task4F: " + str(f1)+"\n")
-    output_file.write("Task4P: " + str(prec)+"\n")
-    output_file.write("Task4R: " + str(rec)+"\n")
-    output_file.flush()
-
-log.warning("output file written")
-print("output file written")
+# result, model_outputs, wrong_predictions = model.eval_model(val_df)
+#
+# dtruth = pd.read_csv('test.tsv', sep='\t')
+# dtruth.set_index('tweet_id', inplace=True)
+#
+#
+# dpred = pd.read_csv('valid2.tsv', sep='\t')
+#
+# dpred.set_index('tweet_id', inplace=True)
+# dpred.rename(columns={"prediction": "pred"}, inplace=True)
+#
+# assert len(dtruth) == len(dpred)
+#
+# dEval = pd.concat([dtruth, dpred], axis=1, join='inner')
+# prec = precision_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
+# rec = recall_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
+# f1 = f1_score(list(dEval['labels']), list(dEval['pred']), pos_label=1, average='binary')
+#
+# #print(f"cf matrix: {cf}\ncr :{cr}\nPrec:{prec}, Rec:{rec}, F1:{f1}")
+#
+# log.warning("scores computed")
+# print("scores computed")
+#
+# # the scores for the leaderboard must be in a file named "scores.txt"
+# # https://github.com/codalab/codalab-competitions/wiki/User_Building-a-Scoring-Program-for-a-Competition#directory-structure-for-submissions
+# with open(os.path.join('scores.txt'), 'w') as output_file:
+#     output_file.write("Task4F: " + str(f1)+"\n")
+#     output_file.write("Task4P: " + str(prec)+"\n")
+#     output_file.write("Task4R: " + str(rec)+"\n")
+#     output_file.flush()
+#
+# log.warning("output file written")
+# print("output file written")
