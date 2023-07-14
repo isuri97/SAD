@@ -22,8 +22,10 @@ arguments = parser.parse_args()
 
 train_df = pd.read_csv('training.tsv', sep="\t")
 val_df = pd.read_csv('validation.tsv', sep="\t")
+test_df = pd.read_csv('test_set.tsv', sep='\t')
 
 train_df = train_df[['tweet_id', 'text', 'labels']]
+val_df = train_df[['tweet_id', 'text', 'labels']]
 # ids_to_select = val_df['id'].astype(int)
 # selected_labels = train_df[train_df['id'].isin(ids_to_select)]['labels'].astype(int)
 # merged_df = train_df.merge(val_df, on='id', how='inner')
@@ -35,7 +37,7 @@ train_df = train_df[['tweet_id', 'text', 'labels']]
 #
 # new_df.to_csv('test.tsv', sep='\t', index=False)
 
-test_sentences = val_df['text'].tolist()
+test_sentences = test_df['text'].tolist()
 
 MODEL_NAME = arguments.model_name
 MODEL_TYPE = arguments.model_type
@@ -60,14 +62,14 @@ model = ClassificationModel(
 )
 
 # Train the model
-model.train_model(train_df)
+model.train_model(train_df, eval_df=val_df)
 
 # Make predictions with the model
 predictions, raw_outputs = model.predict(test_sentences)
 print(predictions)
 
-val_df['prediction'] = predictions
-print(val_df)
+test_df['prediction'] = predictions
+print(test_df)
 
 # print_information(val_df, "pred", "labels")
 dpred = val_df[['tweet_id', 'prediction']].copy()
