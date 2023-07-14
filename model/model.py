@@ -110,7 +110,7 @@ test_df['label'] = predictions
 print(test_df)
 
 new_df2 = test_df[['id', 'label']].copy()
-new_df2.to_csv('test-transformer.tsv', sep='\t', index=False)
+new_df2.to_csv('test-trxlb.tsv', sep='\t', index=False)
 
 # Evaluate the model
 # result, model_outputs, wrong_predictions = model.eval_model(validation_set)
