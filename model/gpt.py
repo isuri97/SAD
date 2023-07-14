@@ -9,12 +9,16 @@ from openai import InvalidRequestError
 nltk.download('punkt')
 
 
-openai.api_key = "sk-WGxUGwhpUsMRNvTYsaosT3BlbkFJAc9HCMQTzqzPBWDWOH0vK"
+openai.api_key = ""
 
 # load dataset
 test_data = pd.read_csv('test_set.csv', sep=',')
 
+start_index = 207
+
 text_list = test_data['text'].to_list()
+
+sublist = text_list[start_index:]
 
 arr=[]
 
@@ -58,10 +62,10 @@ final_predictions = []
 # input_text = "Man after reading your comment I have to say I'm a little jealous, you sound like the person I want to be someday. I'm making progress and a lot of it has been on my own but the therapy that I've been getting has been helpful too. I'm realizing the progress I've made makes new progress much easier."
 # classification_result = perform_binary_classification(input_text)
 with open(f'chatgpt.txt', 'a') as f:
-  for i in test_data['text']:
+  for i in sublist:
     classification_result = perform_binary_classification(i)
     f.write(classification_result + '\n')
-    time.sleep(20)
+    time.sleep(30)
     final_predictions.append(classification_result)
     print("Classification result:", classification_result)
 
