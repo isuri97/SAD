@@ -14,7 +14,7 @@ openai.api_key = ""
 # load dataset
 test_data = pd.read_csv('test_set.csv', sep=',')
 
-start_index = 207
+start_index = 208
 
 text_list = test_data['text'].to_list()
 
@@ -61,7 +61,7 @@ final_predictions = []
 # Example usage
 # input_text = "Man after reading your comment I have to say I'm a little jealous, you sound like the person I want to be someday. I'm making progress and a lot of it has been on my own but the therapy that I've been getting has been helpful too. I'm realizing the progress I've made makes new progress much easier."
 # classification_result = perform_binary_classification(input_text)
-with open(f'chatgpt.txt', 'a') as f:
+with open(f'chatgpt1.txt', 'a') as f:
   for i in sublist:
     classification_result = perform_binary_classification(i)
     f.write(classification_result + '\n')
