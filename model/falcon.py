@@ -32,8 +32,10 @@ pipeline = pipeline(
 
 # llm = AutoModelForCausalLM.from_pretrained(pipeline=pipeline, model_kwargs={'temperature':0})
 llm = HuggingFacePipeline(pipeline=pipeline, model_kwargs={'temperature':0})
-template = """Posts containing any form of conveys self reporting of social anxiety or diagnosed with social anxiety disorder, which can be veiled or direct are social anxiety posts. 
-This includes posts of self reported the social anxiety (SA). Posts that do not contain any information related to social Anxiety are not diagnosed as social anxiety.
+template = """Posts containing any form of conveys self reporting of social anxiety, diagnosed with SAD, doctor agrees or believes on SAD, attended to therapest for SAD,
+taking medicine for SAD, which can be veiled or direct are social anxiety posts. 
+This includes posts of self reported the social anxiety (SA). Posts that do not contain any information related to social Anxiety, not diagnosed as social anxiety, having
+diagnosed with other disease, just going to the counselor, just self diagnosed without doctor and taking medicine without prescription marked as zero.
 Question: {question}
 Answer:"""
 prompt = PromptTemplate(template=template, input_variables=["question"])
